@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Bar Chart</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
-    <link href="style/main.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
+    <style>
+    body {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(128,128,128);
+    }
+    h1{
+        font-weight: normal;
+        font-size: 25px;
+    }
+    .values {
+        font-size: 11px;
+        fill: rgb(0, 0, 0);
+        font-weight: lighter;
+    }
+    .bar:hover{
+        opacity: .8;
+    }
+    .country{
+        font-weight: lighter;
+        font-size: 13px;
+    }
+    </style>
+</head>
+<body>
     <div id="graph">
         <h1>CO2 (kt) Emissions per country (2009)</h1>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
     <script src="js/main.js" charset="utf-8"></script>
-  </body>
+</body>
 </html>

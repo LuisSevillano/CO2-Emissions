@@ -2,12 +2,10 @@ var margin = {top: 30, right: 20, bottom: 40, left: 40},
 width = Math.min(window.innerWidth, 1000) - margin.left - margin.right,
 height = Math.min(window.innerHeight, 900) - margin.top - margin.bottom;
 
-//bar Width
-var barWidth = 100;
-
 //formatter
 var formatValue = d3.format("0,000");
 
+//bar attributes
 var barHeight = 10, barGap = 13;
 
 //translating the graph
@@ -17,6 +15,7 @@ var translate = 110;
 d3.csv("data/CO2-Emissions.csv", function(error, data){
     if (error) throw error;
 
+    //iterate throught data to convert strings to numbers
     data.forEach(function(d){
         d.value = +d.value;
     });
@@ -35,6 +34,7 @@ d3.csv("data/CO2-Emissions.csv", function(error, data){
     var bar = svg.append("g").attr("class", "bars").selectAll(".bar")
     .data(data);
 
+    //create bar elements
     bar.enter()
     .append("rect")
     .attr("width", 0)
@@ -50,17 +50,18 @@ d3.csv("data/CO2-Emissions.csv", function(error, data){
         return d.country + ": "+d.value;
     });
 
+    //update values
     bar.transition().duration(1000)
     .attr("width", function(d){
         return xScale(d.value) ;
     });
     d3.selectAll(".bars").attr("transform", "translate(" + translate + ",0)");
 
-
-    //bar values
+    //select text bar values
     var values = svg.append("g").attr("class", "values").selectAll(".value")
     .data(data);
 
+    //create text elements
     values.enter()
     .append("text")
     .attr("class", "value")
@@ -74,16 +75,16 @@ d3.csv("data/CO2-Emissions.csv", function(error, data){
         return addComas(d.value);
     });
 
+    //update actual position
     values
     .transition()
     .duration(1000)
     .attr("x", function(d){
         return xScale(d.value) ;
-    })
-
+    });
     d3.selectAll(".values").attr("transform", "translate(" + translate + ",0)");
 
-    //countries
+    //create countries texts
     var values = svg.append("g").attr("class", "countries").selectAll(".country")
     .data(data)
     .enter()
@@ -100,6 +101,7 @@ d3.csv("data/CO2-Emissions.csv", function(error, data){
         return d.country;
     });
 
+    //create the line between countries and bars
     var line = svg.append("line")
     .attr("x1", -1)
     .attr("x2", -1)
@@ -109,11 +111,9 @@ d3.csv("data/CO2-Emissions.csv", function(error, data){
     .attr("stroke-width", 1)
     .attr("transform", "translate(" + translate + ",0)");
 
-
-
 });
 
-//function to
+//function to add a coma to values
 function addComas(n) {
-       return formatValue(n).replace('.', ',').replace('.', ',');
-   }
+    return formatValue(n).replace('.', ',').replace('.', ',');
+}
