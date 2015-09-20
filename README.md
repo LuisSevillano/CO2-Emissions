@@ -1,3 +1,3 @@
 # CO2-Emissions
 ## Barchart
-### CO2 emissions per country between 2000-2009
+Creating a barChart shows CO2 (kt) emissions per country in 2009
